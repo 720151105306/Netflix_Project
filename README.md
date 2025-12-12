@@ -39,32 +39,38 @@ addition for data analytics and BI learners.
 ### 4. Data Model
 
 -   Verify table relationships (usually only one table required).
--   Create lookup tables (Ratings, Country) if needed.
 
-### 5. Create Calculated Columns / Extracts
-
-``` dax
-YearAdded = YEAR('Netflix'[Date Added])
-```
-
-### 6. Add Key DAX Measures
+### 5. Add Key DAX Measures
 
 ``` dax
-Total Titles = COUNTROWS('Netflix')
-Movies Count = CALCULATE([Total Titles], 'Netflix'[Type] = "Movie")
-TV Shows Count = CALCULATE([Total Titles], 'Netflix'[Type] = "TV Show")
-Titles by Rating = COUNT('Netflix'[Rating])
+1. Total Shows
+Total Shows = COUNTROWS('Netflix')
+2. Total Movies
+Total Movies = CALCULATE(COUNTROWS('Netflix'), 'Netflix'[type] = "Movie")
+3. Total TV Shows
+Total TV Shows = CALCULATE(COUNTROWS('Netflix'), 'Netflix'[type] = "TV Show")
+4. Titles Added by Year
+Titles Added = COUNT('Netflix'[show_id])
+
 ```
 
 ### 7. Design Visuals
 
--   **Slicers:** YearAdded, Country, Type, Rating\
--   **Cards:** Total Titles, Movies Count, TV Shows Count\
--   **Donut / Bar Chart:** Type vs Rating\
--   **Line Chart:** Year-wise trend\
--   **Map:** Country distribution\
--   **Bar Chart:** Top genres/directors\
--   **Table:** Title, Type, Release Year, Rating, Country
+These visuals below represent the actual charts included in your PBIX file:
+
+ -   KPI Cards:Total Titles,Total Movies,Total TV Shows,Total Countries
+ -   Donut Chart – Movies vs TV Shows
+        Shows the percentage split of Movie and TV Show titles.
+ -   Bar Chart – Genre-wise Content Count
+        Displays top genres like:
+ -   Column Chart – Rating Distribution
+       Shows count of titles under ratings:
+ -   Map Visual – Titles by Country
+       A world map showing which countries produce the most Netflix content.
+ -   Line Chart – Titles Added by Year
+       Trend of how many titles Netflix added each year.
+ -   licers / Filters
+        dashboard includes slicers for:Type (Movie / TV Show), 
 
 ### 8. Interactivity & Formatting
 
@@ -85,11 +91,3 @@ Titles by Rating = COUNT('Netflix'[Rating])
 -   Capture dashboard screenshots.
 -   Prepare README and other files.
 
-## Prepare Repository Files
-
--   **README.md**
--   **Netflix_Dashboard.pbix**
--   **/screenshots** (dashboard images)
--   **/data** (optional sample CSV or Kaggle link)
--   **DAX_examples.md**
--   **LICENSE**
